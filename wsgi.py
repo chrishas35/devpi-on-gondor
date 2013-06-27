@@ -1,16 +1,22 @@
-from sys import argv
-from os import environ, path
+import os
 
 from devpi_server.config import parseoptions
 from devpi_server.main import XOM
 
 
-datadir = path.join(environ['GONDOR_DATA_DIR'], '.devpi', 'server')
-secretfile = path.join(datadir, 'secretfile')
+myargs = []
 
-argv.append('--datadir=%s' % datadir)
-argv.append('--secretfile=%s' % secretfile)
+if 'GONDOR_DATA_DIR' in os.environ:
+  datadir = os.path.join(os.environ['GONDOR_DATA_DIR'], '.devpi', 'server')
+  secretfile = os.path.join(datadir, 'secretfile')
+  
+  myargs.append('--datadir=%s' % datadir)
+  myargs.append('--secretfile=%s' % secretfile)
 
-config = parseoptions(argv)
 
-application = XOM(config).create_app()
+def make_application(args):
+    """ entry point for making an application object with defaults. """
+    config = parseoptions(args)
+    return XOM(config).create_app()
+
+application = make_application(myargs)
