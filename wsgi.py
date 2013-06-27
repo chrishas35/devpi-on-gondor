@@ -11,6 +11,6 @@ secretfile = path.join(datadir, 'secretfile')
 argv.append('--datadir=%s' % datadir)
 argv.append('--secretfile=%s' % secretfile)
 
-config = parseoptions(sys.argv)
+config = parseoptions(argv)
 
 application = XOM(config).create_app()
