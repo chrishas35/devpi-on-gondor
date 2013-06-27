@@ -4,7 +4,7 @@ from devpi_server.config import parseoptions
 from devpi_server.main import XOM
 
 
-myargs = []
+myargs = ['',]
 
 if 'GONDOR_DATA_DIR' in os.environ:
   datadir = os.path.join(os.environ['GONDOR_DATA_DIR'], '.devpi', 'server')
